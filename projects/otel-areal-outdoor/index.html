@@ -7643,7 +7643,8 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
     border-bottom-width: 1px;
     max-height: min(28svh, 230px);
     overflow-y: auto;
-    padding: 4px 0 12px;
+    padding: 4px 12px 12px 0;
+    scrollbar-gutter: stable;
     transform: translateY(0);
   }
 
@@ -7849,6 +7850,12 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   /* На телефоне вход в разделы остаётся только через компактное меню. */
   .site-header nav {
     display: none;
+  }
+
+  /* Keep the story copy clear of both the display heading and the scroll rail. */
+  .gallery-story {
+    column-gap: 18px;
+    row-gap: 12px;
   }
 
   /* Описание FAQ начинает ту же левую ось, что и заголовок. */
