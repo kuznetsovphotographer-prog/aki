@@ -7359,32 +7359,32 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
 
   .lead-dialog.is-success {
     gap: 0;
-    padding: 20px;
+    padding: clamp(16px, 4.5vw, 22px);
   }
 
   .lead-dialog.is-success .lead-dialog__header {
-    padding-top: 5px;
+    padding-top: 2px;
   }
 
   .lead-dialog.is-success .lead-dialog__header > div {
-    width: calc(100% - 50px);
+    width: calc(100% - 46px);
   }
 
   .lead-dialog.is-success .lead-dialog__header h2 {
-    font-size: clamp(35px, 10.6vw, 45px);
-    line-height: 1;
-    margin-top: 10px;
-    max-width: 11ch;
+    font-size: clamp(25px, 7vw, 32px);
+    line-height: 1.05;
+    margin-top: 8px;
+    max-width: 14ch;
   }
 
   .lead-dialog.is-success .lead-dialog__header h2.is-long {
-    font-size: clamp(27px, 7.4vw, 32px);
+    font-size: clamp(21px, 5.8vw, 26px);
     max-width: 100%;
   }
 
   .lead-dialog.is-success .lead-dialog__header h2.is-very-long {
-    font-size: clamp(22px, 6vw, 27px);
-    letter-spacing: -0.035em;
+    font-size: clamp(18px, 5vw, 22px);
+    letter-spacing: -0.03em;
     max-width: 100%;
     overflow-wrap: normal;
     text-wrap: wrap;
@@ -7392,43 +7392,58 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   }
 
   .lead-dialog.is-success .lead-dialog__close {
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
   .lead-dialog__success {
-    gap: 20px;
+    gap: clamp(14px, 3.8vw, 18px);
   }
 
   .lead-dialog__success-route {
     gap: 10px;
   }
 
+  .lead-dialog__success-route svg {
+    height: 24px;
+  }
+
   .lead-dialog__success-copy p {
-    font-size: clamp(23px, 7.8vw, 31px);
-    line-height: 1.18;
+    font-size: clamp(15px, 4.2vw, 18px);
+    letter-spacing: -0.02em;
+    line-height: 1.35;
   }
 
   .lead-dialog__success-summary {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lead-dialog__success-summary > div {
-    gap: 8px;
-    padding: 14px 0;
+    gap: 4px;
+    padding: 10px 0;
   }
 
   .lead-dialog__success-summary > div + div {
-    border-left: 0;
-    border-top: 1px solid var(--theme-line);
-    padding-left: 0;
+    border-left: 1px solid var(--theme-line);
+    border-top: 0;
+    padding-left: 14px;
+  }
+
+  .lead-dialog__success-summary dt {
+    font-size: 8px;
   }
 
   .lead-dialog__success-summary dd {
-    font-size: 14px;
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .lead-dialog__success-summary svg {
+    height: 14px;
+    width: 14px;
   }
 
   .lead-dialog__success-action {
-    min-height: 48px;
+    min-height: 46px;
   }
 
   .contacts-methods {
