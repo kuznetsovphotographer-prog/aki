@@ -1,4 +1,4 @@
 {
-  "endpoint": "https://prointeriors.ru/lead",
+  "endpoint": "https://api.prointeriors.ru/lead",
   "previewSuccess": false
 }
