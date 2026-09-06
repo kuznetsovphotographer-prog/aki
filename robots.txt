@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kuznetsovphotographer-prog.github.io/aki/sitemap.xml
-Sitemap: https://kuznetsovphotographer-prog.github.io/aki/image-sitemap.xml
+Sitemap: https://prointeriors.ru/sitemap.xml
+Sitemap: https://prointeriors.ru/image-sitemap.xml
