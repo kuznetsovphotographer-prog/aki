@@ -988,12 +988,24 @@ a:focus-visible,
 .hero-author {
   margin-bottom: var(--hero-label-gap);
   margin-left: calc(10px + var(--hero-label-gap));
+  min-height: 9px;
 }
 
 .hero-location {
   justify-self: center;
   margin-top: 2px;
+  min-height: 120px;
   writing-mode: vertical-rl;
+}
+
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.18s ease-out;
+}
+
+.hero-char--visible {
+  opacity: 1;
 }
 
 .hero h1 {
@@ -8836,6 +8848,16 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
 
   .scroll-route-overlay {
     display: none;
+  }
+
+  .hero-location,
+  .hero-author,
+  .hero-char {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
   }
 
 }
