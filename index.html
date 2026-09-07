@@ -4633,6 +4633,34 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   transform: translateY(0);
 }
 
+.lead-dialog__consent {
+  color: var(--theme-muted);
+  font-size: 10px;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  margin: 0;
+  text-align: left;
+}
+
+.lead-dialog__consent-link {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--theme-fg);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 160ms ease;
+}
+
+.lead-dialog__consent-link:hover,
+.lead-dialog__consent-link:focus-visible {
+  opacity: 0.7;
+}
+
 @media (min-width: 661px) {
   .lead-dialog__estimate {
     align-content: start;
@@ -7436,6 +7464,11 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   .lead-dialog__submit {
     justify-self: stretch;
     width: 100%;
+  }
+
+  .lead-dialog__consent {
+    font-size: 9.5px;
+    line-height: 1.35;
   }
 
   .lead-dialog.is-success {
