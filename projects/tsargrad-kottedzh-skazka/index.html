@@ -4801,13 +4801,50 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
 }
 
 .lead-dialog__consent {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 6px;
   color: var(--theme-muted);
-  font-size: 10px;
-  letter-spacing: 0.01em;
-  line-height: 1.4;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: 1.6;
   margin: 0;
   text-align: left;
 }
+
+.lead-dialog__consent input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--theme-fg);
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+}
+
+.lead-dialog__consent input:checked { background: var(--theme-fg); }
+.lead-dialog__consent input:checked::after {
+  content: '';
+  width: 4px;
+  height: 8px;
+  border: solid var(--theme-bg);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+.lead-dialog__consent-target {
+  display: grid;
+  place-items: start;
+  padding-top: 1px;
+  width: 24px;
+  min-height: 24px;
+}
+.lead-dialog__consent input:focus-visible { outline: 2px solid var(--theme-fg); outline-offset: 4px; }
+.lead-dialog__consent label { cursor: pointer; }
+.lead-dialog__consent > div { min-width: 0; overflow-wrap: anywhere; }
 
 .lead-dialog__consent-link {
   appearance: none;
@@ -5479,6 +5516,48 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   display: grid;
   gap: 11px;
 }
+
+.policy-dialog__content section h3 {
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 650;
+  margin: 28px 0 10px;
+}
+
+.legal-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px clamp(20px, 5vw, 64px) 48px;
+  color: var(--theme-fg);
+  overflow-wrap: anywhere;
+}
+.legal-page__header, .legal-page__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 20px 0;
+}
+.legal-page__header { border-bottom: 1px solid var(--theme-line); }
+.legal-page__footer { border-top: 1px solid var(--theme-line); }
+.legal-page__document { padding: clamp(32px, 6vw, 64px) 0; }
+.legal-page__document h1 {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  margin: 0 0 28px;
+}
+.legal-page__document h2 { font-family: inherit; font-weight: 650; font-size: 20px; line-height: 1.45; letter-spacing: normal; margin: 32px 0 12px; }
+.legal-page__document p { font-size: 16px; line-height: 1.8; margin: 0 0 16px; }
+.legal-page a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.legal-page a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.legal-page__skip { position: absolute; left: -10000px; }
+.legal-page__skip:focus { position: static; }
 
 .policy-dialog__content p,
 .policy-dialog__content li {
@@ -7682,10 +7761,7 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
     width: 100%;
   }
 
-  .lead-dialog__consent {
-    font-size: 9.5px;
-    line-height: 1.35;
-  }
+  .lead-dialog__consent { font-size: 12px; line-height: 1.6; }
 
   .lead-dialog.is-success {
     gap: 0;
