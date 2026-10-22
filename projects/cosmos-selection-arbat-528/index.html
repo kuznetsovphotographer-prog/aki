@@ -1801,21 +1801,102 @@ a:focus-visible,
   margin: clamp(38px, 5vw, 78px) 0 24px;
 }
 
-.featured-note__steps p {
+.featured-note__step {
   border-top: 1px solid var(--theme-line);
-  display: grid;
-  font-size: var(--body-copy-size);
-  gap: 16px;
-  grid-template-columns: 28px 1fr;
-  line-height: 1.55;
-  margin: 0;
-  padding: 16px 0;
+  isolation: isolate;
+  position: relative;
 }
 
-.featured-note__steps span {
+.featured-note__step::before {
+  background: linear-gradient(90deg, var(--theme-panel-hover), var(--theme-panel));
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.featured-note__step.is-open::before,
+.featured-note__step:has(.featured-note__trigger:focus-visible)::before {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .featured-note__step:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+.featured-note__trigger {
+  align-items: start;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  font-size: var(--body-copy-size);
+  gap: 16px;
+  grid-template-columns: 28px minmax(0, 1fr) 16px;
+  line-height: 1.55;
+  margin: 0;
+  padding: 16px 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.featured-note__trigger:focus-visible {
+  outline: 1px solid var(--theme-fg);
+  outline-offset: -1px;
+}
+
+.featured-note__number {
   font-size: 8px;
   font-weight: 650;
   letter-spacing: 0.12em;
+}
+
+.featured-note__trigger svg {
+  align-self: center;
+  height: 16px;
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  width: 16px;
+}
+
+.featured-note__trigger svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+.featured-note__step.is-open .featured-note__trigger svg {
+  transform: rotate(45deg);
+}
+
+.featured-note__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 440ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.featured-note__step.is-open .featured-note__body {
+  grid-template-rows: 1fr;
+}
+
+.featured-note__body-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.featured-note__body p {
+  color: var(--theme-muted);
+  font-size: var(--body-copy-size);
+  line-height: 1.65;
+  margin: 0;
+  padding: 0 44px 22px 56px;
 }
 
 .featured-note > a {
