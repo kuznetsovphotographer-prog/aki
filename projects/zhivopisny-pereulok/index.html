@@ -10169,6 +10169,148 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   }
 }
 
+/* Local visual study. Empty slots have no layout or paint in the classic mode. */
+.vx-slot { display: none; }
+[data-visual-mode="heron"] {
+  --vx-ink: #676359;
+  --vx-soft-ink: #a6a195;
+}
+
+
+[data-visual-mode="heron"] .vx-label { position: relative; }
+[data-visual-mode="heron"] .vx-slot { display: block; pointer-events: none; }
+[data-visual-mode="heron"] :is(.vx-slot--room, .vx-slot--contact) {
+  isolation: isolate;
+  position: absolute;
+  left: 0;
+}
+[data-visual-mode="heron"] .vx-slot--room {
+  top: 28px;
+  width: clamp(104px, 10vw, 176px);
+  aspect-ratio: 5 / 3;
+}
+[data-visual-mode="heron"] .vx-slot--contact {
+  bottom: calc(100% + 12px);
+  width: clamp(96px, 9vw, 144px);
+  aspect-ratio: 2 / 1;
+}
+
+.vx-figure {
+  --figure-accent: #797568;
+  --figure-paper: #f6f5ef;
+  --figure-face: #e7e5dd;
+  --figure-top: #eeece4;
+  --figure-shade-0: #c5c2b8;
+  --figure-shade-1: #d1cec4;
+  --figure-shade-2: #dcd9cf;
+  --figure-shade-3: #e6e3da;
+  --figure-mid: #777267;
+  --figure-hi: #4d4941;
+  --figure-lo: #9b988d;
+  --figure-faint: #bab7ad;
+  display: block;
+  flex: none;
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+}
+.vx-figure :is(path, circle) { vector-effect: non-scaling-stroke; }
+.vx-figure .iso-fill { fill: var(--figure-face); }
+.vx-figure .iso-top { fill: var(--figure-top); }
+.vx-figure .iso-shade[data-shade="0"] { fill: var(--figure-shade-0); }
+.vx-figure .iso-shade[data-shade="1"] { fill: var(--figure-shade-1); }
+.vx-figure .iso-shade[data-shade="2"] { fill: var(--figure-shade-2); }
+.vx-figure .iso-shade[data-shade="3"] { fill: var(--figure-shade-3); }
+.vx-figure .iso-line { fill: none; stroke: var(--figure-lo); stroke-width: .58px; stroke-linecap: round; stroke-linejoin: round; }
+.vx-figure .iso-line[data-tone="hi"] { stroke: var(--figure-hi); }
+.vx-figure .iso-line[data-tone="mid"] { stroke: var(--figure-mid); }
+.vx-figure .iso-line[data-tone="faint"] { stroke: var(--figure-faint); }
+.vx-figure .iso-line[data-tone="accent"] { stroke: var(--figure-accent); }
+.vx-figure .figure-face { fill: var(--figure-face); }
+.vx-figure .figure-paper { --figure-face: #f7f6f0; --figure-top: #fbfaf5; }
+.vx-figure .figure-face.figure-paper { fill: var(--figure-paper); }
+.vx-figure .figure-dark { --figure-top: #75736b; --figure-shade-0: #44443e; --figure-shade-1: #52524b; --figure-shade-2: #606057; --figure-shade-3: #6a6961; --figure-face: #5a5952; }
+.vx-figure .figure-metal { --figure-top: #d9d8d0; --figure-face: #bcbcb3; --figure-shade-0: #a09f98; --figure-shade-1: #b4b3aa; }
+.vx-figure .figure-base { --figure-top: #dedbd1; --figure-shade-0: #c0bcb0; --figure-shade-1: #cac6ba; }
+.vx-figure .vx-part { opacity: 0; }
+.vx-figure[data-seen="true"] .vx-part {
+  animation: vx-assemble 800ms cubic-bezier(.22, .8, .25, 1) both;
+  animation-delay: calc(var(--vx-order, 0) * 75ms);
+  animation-play-state: paused;
+}
+.vx-figure[data-seen="true"] .vx-room-light { animation: vx-room-light 6.8s ease-in-out infinite paused; }
+.vx-figure[data-seen="true"] .vx-contact-sheet { animation: vx-contact-sheet 7.2s ease-in-out infinite paused; }
+.vx-figure[data-active="true"] :is(.vx-part, .vx-room-light, .vx-contact-sheet) { animation-play-state: running; }
+.vx-figure[data-reduced="true"] .vx-part { opacity: 1; translate: none; animation: none; }
+.vx-figure[data-reduced="true"] :is(.vx-room-light, .vx-contact-sheet) { animation: none; }
+@keyframes vx-assemble { from { opacity: 0; translate: 0 5px; } to { opacity: 1; translate: 0 0; } }
+@keyframes vx-room-light { 0%, 15%, 90%, 100% { opacity: .2; } 42%, 62% { opacity: .62; } }
+@keyframes vx-contact-sheet { 0%, 18%, 88%, 100% { translate: 0 0; } 42%, 58% { translate: 0 -3px; } }
+
+
+[data-visual-mode="heron"] .vx-slot--hero { display: contents; }
+.vx-hero-reveal {
+  --vx-reveal-time: 7000ms;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.vx-hero-reveal[hidden], .vx-hero-reveal[data-phase="complete"] { display: none !important; }
+.vx-hero-reveal__paper {
+  position: absolute;
+  inset: 0;
+  background: var(--theme-bg);
+}
+.vx-hero-reveal__drawing { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; fill: none; }
+.vx-hero-contour { display: none; }
+.vx-hero-reveal[data-frame="desktop"] .vx-hero-contour--desktop,
+.vx-hero-reveal[data-frame="compact"] .vx-hero-contour--compact { display: initial; }
+.vx-hero-contour path {
+  stroke: var(--vx-ink);
+  stroke-width: .85px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.vx-hero-reveal[data-phase="drawing"] .vx-hero-reveal__paper { animation: vx-hero-paper var(--vx-reveal-time) linear both paused; }
+.vx-hero-reveal[data-phase="drawing"] .vx-hero-reveal__drawing { animation: vx-hero-ink var(--vx-reveal-time) ease both paused; }
+.vx-hero-reveal[data-phase="drawing"] .vx-hero-contour path { animation-name: vx-hero-trace; animation-duration: calc(var(--vx-reveal-time) * .48); animation-timing-function: cubic-bezier(.22, .65, .3, 1); animation-fill-mode: both; animation-play-state: paused; }
+.vx-hero-reveal[data-active="true"][data-allowed="true"] :is(.vx-hero-reveal__paper, .vx-hero-reveal__drawing, .vx-hero-contour path) { animation-play-state: running; }
+@keyframes vx-hero-paper { 0%, 30% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes vx-hero-ink { 0%, 46% { opacity: 1; } 96%, 100% { opacity: 0; } }
+@keyframes vx-hero-trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+@media (max-width: 1024px), (any-pointer: coarse) and (max-width: 1366px) {
+  [data-visual-mode="heron"] .vx-label {
+    align-items: center;
+    display: flex;
+    grid-column: 1 / -1;
+    min-height: 88px;
+    padding: 0 144px 0 0;
+  }
+  [data-visual-mode="heron"] :is(.vx-slot--room, .vx-slot--contact) {
+    bottom: auto;
+    left: auto;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 128px;
+  }
+}
+@media (min-width: 661px) and (max-width: 1024px), (min-width: 661px) and (any-pointer: coarse) and (max-width: 1366px) {
+  [data-visual-mode="heron"] .vx-label { min-height: 112px; padding-right: 192px; }
+  [data-visual-mode="heron"] .vx-slot--room { width: 176px; }
+  [data-visual-mode="heron"] .vx-slot--contact { width: 144px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vx-hero-reveal { display: none !important; }
+  .vx-figure .vx-part { animation: none !important; opacity: 1; translate: none; }
+  .vx-figure * { animation: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -10216,6 +10358,258 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
     will-change: auto !important;
   }
 
+}
+
+/* Retained contact-sheet story; other section layouts use the classic composition. */
+[data-visual-mode="heron"] .process > .section-heading {
+  align-items: center;
+  column-gap: clamp(32px, 5vw, 88px);
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  row-gap: 24px;
+}
+[data-visual-mode="heron"] .process > .section-heading > .vx-label {
+  align-items: stretch;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  justify-content: center;
+  min-height: 280px;
+  padding: 0;
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+}
+[data-visual-mode="heron"] .process > .section-heading h2 {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  font-size: clamp(44px, 4vw, 70px);
+}
+[data-visual-mode="heron"] .process > .section-heading > span {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  justify-self: start;
+}
+[data-visual-mode="heron"] :is(.vx-slot--room, .vx-slot--contact) {
+  bottom: auto;
+  height: auto;
+  left: auto;
+  margin: 0 auto;
+  max-width: 460px;
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
+  width: 100%;
+  overflow: clip;
+}
+[data-visual-mode="heron"] .vx-slot--contact { max-width: 440px; }
+.vx-figure text { font-family: var(--sans); letter-spacing: 0; text-transform: none; }
+@media (max-width: 1024px), (any-pointer: coarse) and (max-width: 1366px) {
+    [data-visual-mode="heron"] .process > .section-heading { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  [data-visual-mode="heron"] .process > .section-heading > .vx-label { grid-column: 1; grid-row: 1; min-height: 0; padding: 0; gap: 12px; }
+    [data-visual-mode="heron"] .process > .section-heading h2 { grid-column: 1; grid-row: 2; font-size: clamp(36px, 6.5vw, 58px); }
+    [data-visual-mode="heron"] .process > .section-heading > span { grid-column: 1; grid-row: 3; }
+  [data-visual-mode="heron"] :is(.vx-slot--room, .vx-slot--contact) { width: 100%; max-width: 420px; }
+}
+
+/* Two synchronized 15-second mini-films. Integrate after older vx animation rules.
+   data-seen keeps the timeline alive; data-active controls pause/resume.
+   All shapes and every visible caption have a complete static fallback. */
+.vx-figure .vx-story-caption { font-family: var(--sans, sans-serif); font-size: 7px; letter-spacing: .035em; }
+.vx-figure :is(.vx-room-framing,.vx-room-shutter,.vx-room-capture,.vx-contact-scan,.vx-contact-selection,.vx-contact-crop) { opacity: 0; }
+.vx-figure .vx-story-caption:not(.vx-caption-final) { opacity: 0; }
+.vx-figure .vx-caption-final { opacity: 1; }
+.vx-figure[data-seen="true"] :is(.vx-contact-photos,.vx-contact-output) { animation: none; opacity: 1; transform: none; }
+.vx-figure[data-seen="true"] :is(
+  .vx-room-floor,
+  .vx-room-walls,
+  .vx-room-window,
+  .vx-room-rig,
+  .vx-room-camera,
+  .vx-room-focus,
+  .vx-room-framing,
+  .vx-room-light,
+  .vx-room-exposure,
+  .vx-room-shutter,
+  .vx-room-capture,
+  .vx-room-proof,
+  .vx-room-proof-image,
+  .vx-room-proof-check,
+  .vx-contact-desk,
+  .vx-contact-board,
+  .vx-contact-clips,
+  .vx-contact-stack,
+  .vx-contact-selection,
+  .vx-contact-scan,
+  .vx-contact-sheet,
+  .vx-contact-develop,
+  .vx-contact-crop,
+  .vx-contact-check,
+  .vx-contact-back-0,
+  .vx-contact-back-1,
+  .vx-contact-back-2,
+  .vx-contact-thumb-0,
+  .vx-contact-thumb-1,
+  .vx-contact-thumb-2,
+  .vx-contact-thumb-3,
+  .vx-contact-thumb-4,
+  .vx-contact-thumb-5,
+  .vx-room-caption-space,
+  .vx-room-caption-frame,
+  .vx-room-caption-light,
+  .vx-room-caption-capture,
+  .vx-room-caption-final,
+  .vx-contact-caption-series,
+  .vx-contact-caption-select,
+  .vx-contact-caption-detail,
+  .vx-contact-caption-develop,
+  .vx-contact-caption-final
+) {
+  animation-duration: 15s;
+  animation-timing-function: cubic-bezier(.4,0,.2,1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-delay: 0s;
+  animation-play-state: paused;
+}
+.vx-figure[data-seen="true"][data-active="true"] :is(
+  .vx-room-floor,
+  .vx-room-walls,
+  .vx-room-window,
+  .vx-room-rig,
+  .vx-room-camera,
+  .vx-room-focus,
+  .vx-room-framing,
+  .vx-room-light,
+  .vx-room-exposure,
+  .vx-room-shutter,
+  .vx-room-capture,
+  .vx-room-proof,
+  .vx-room-proof-image,
+  .vx-room-proof-check,
+  .vx-contact-desk,
+  .vx-contact-board,
+  .vx-contact-clips,
+  .vx-contact-stack,
+  .vx-contact-selection,
+  .vx-contact-scan,
+  .vx-contact-sheet,
+  .vx-contact-develop,
+  .vx-contact-crop,
+  .vx-contact-check,
+  .vx-contact-back-0,
+  .vx-contact-back-1,
+  .vx-contact-back-2,
+  .vx-contact-thumb-0,
+  .vx-contact-thumb-1,
+  .vx-contact-thumb-2,
+  .vx-contact-thumb-3,
+  .vx-contact-thumb-4,
+  .vx-contact-thumb-5,
+  .vx-room-caption-space,
+  .vx-room-caption-frame,
+  .vx-room-caption-light,
+  .vx-room-caption-capture,
+  .vx-room-caption-final,
+  .vx-contact-caption-series,
+  .vx-contact-caption-select,
+  .vx-contact-caption-detail,
+  .vx-contact-caption-develop,
+  .vx-contact-caption-final
+) { animation-play-state: running; }
+.vx-figure :is(.vx-room-camera,.vx-room-framing,.vx-room-shutter,.vx-room-proof,.vx-room-proof-check,.vx-contact-sheet,.vx-contact-crop,.vx-contact-check) { transform-box: fill-box; transform-origin: center; }
+.vx-figure .vx-room-camera { transform-origin: center bottom; }
+.vx-figure[data-seen="true"] .vx-room-floor { animation-name: vx-film-floor; }
+.vx-figure[data-seen="true"] .vx-room-walls { animation-name: vx-film-walls; }
+.vx-figure[data-seen="true"] .vx-room-window { animation-name: vx-film-window; }
+.vx-figure[data-seen="true"] .vx-room-rig { animation-name: vx-film-rig; }
+.vx-figure[data-seen="true"] .vx-room-camera { animation-name: vx-film-camera; }
+.vx-figure[data-seen="true"] .vx-room-focus { animation-name: vx-film-focus; }
+.vx-figure[data-seen="true"] .vx-room-framing { animation-name: vx-film-framing; }
+.vx-figure[data-seen="true"] .vx-room-light { animation-name: vx-film-light; }
+.vx-figure[data-seen="true"] .vx-room-exposure { animation-name: vx-film-exposure; }
+.vx-figure[data-seen="true"] .vx-room-shutter { animation-name: vx-film-shutter; }
+.vx-figure[data-seen="true"] .vx-room-capture { animation-name: vx-film-capture; }
+.vx-figure[data-seen="true"] .vx-room-proof { animation-name: vx-film-room-proof; }
+.vx-figure[data-seen="true"] .vx-room-proof-image { animation-name: vx-film-room-develop; }
+.vx-figure[data-seen="true"] .vx-room-proof-check { animation-name: vx-film-check; }
+.vx-figure[data-seen="true"] .vx-contact-desk { animation-name: vx-film-floor; }
+.vx-figure[data-seen="true"] .vx-contact-board { animation-name: vx-film-board; }
+.vx-figure[data-seen="true"] .vx-contact-clips { animation-name: vx-film-clips; }
+.vx-figure[data-seen="true"] .vx-contact-stack { animation-name: vx-film-stack; }
+.vx-figure[data-seen="true"] .vx-contact-selection { animation-name: vx-film-selection; }
+.vx-figure[data-seen="true"] .vx-contact-scan { animation-name: vx-film-scan; }
+.vx-figure[data-seen="true"] .vx-contact-sheet { animation-name: vx-film-selected; }
+.vx-figure[data-seen="true"] .vx-contact-develop { animation-name: vx-film-contact-develop; }
+.vx-figure[data-seen="true"] .vx-contact-crop { animation-name: vx-film-crop; }
+.vx-figure[data-seen="true"] .vx-contact-check { animation-name: vx-film-check; }
+.vx-figure[data-seen="true"] .vx-contact-back-0 { animation-name: vx-film-back-left; }
+.vx-figure[data-seen="true"] .vx-contact-back-1 { animation-name: vx-film-back-centre; }
+.vx-figure[data-seen="true"] .vx-contact-back-2 { animation-name: vx-film-back-right; }
+.vx-figure[data-seen="true"] .vx-contact-thumb-0 { animation-name: vx-film-thumb-0; }
+.vx-figure[data-seen="true"] .vx-contact-thumb-1 { animation-name: vx-film-thumb-1; }
+.vx-figure[data-seen="true"] .vx-contact-thumb-2 { animation-name: vx-film-thumb-2; }
+.vx-figure[data-seen="true"] .vx-contact-thumb-3 { animation-name: vx-film-thumb-3; }
+.vx-figure[data-seen="true"] .vx-contact-thumb-4 { animation-name: vx-film-thumb-4; }
+.vx-figure[data-seen="true"] .vx-contact-thumb-5 { animation-name: vx-film-thumb-5; }
+.vx-figure[data-seen="true"] .vx-room-caption-space { animation-name: vx-film-caption-0; }
+.vx-figure[data-seen="true"] .vx-room-caption-frame { animation-name: vx-film-caption-1; }
+.vx-figure[data-seen="true"] .vx-room-caption-light { animation-name: vx-film-caption-2; }
+.vx-figure[data-seen="true"] .vx-room-caption-capture { animation-name: vx-film-caption-3; }
+.vx-figure[data-seen="true"] .vx-room-caption-final { animation-name: vx-film-caption-4; }
+.vx-figure[data-seen="true"] .vx-contact-caption-series { animation-name: vx-film-caption-0; }
+.vx-figure[data-seen="true"] .vx-contact-caption-select { animation-name: vx-film-caption-1; }
+.vx-figure[data-seen="true"] .vx-contact-caption-detail { animation-name: vx-film-caption-2; }
+.vx-figure[data-seen="true"] .vx-contact-caption-develop { animation-name: vx-film-caption-3; }
+.vx-figure[data-seen="true"] .vx-contact-caption-final { animation-name: vx-film-caption-4; }
+
+@keyframes vx-film-floor { 0%{opacity:.2;transform:translateY(9px)} 7%,94%{opacity:1;transform:none} 100%{opacity:.2;transform:translateY(9px)} }
+@keyframes vx-film-walls { 0%,4%{opacity:0;transform:translateY(22px)} 13%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translateY(12px)} }
+@keyframes vx-film-window { 0%,9%{opacity:0;transform:translate(0,-16px)} 17%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,-9px)} }
+@keyframes vx-film-rig { 0%,11%{opacity:0;transform:translateY(17px)} 19%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translateY(10px)} }
+@keyframes vx-film-camera { 0%,13%{opacity:0;transform:translateY(-17px) rotate(-8deg)} 20%{opacity:1;transform:rotate(-3deg)} 29%{opacity:1;transform:rotate(2deg)} 38%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translateY(-12px)} }
+@keyframes vx-film-focus { 0%,21%,39%,100%{transform:none} 27%{transform:translate(-5px,2.5px)} 33%{transform:translate(-1.5px,.75px)} }
+@keyframes vx-film-framing { 0%,17%{opacity:0;transform:scale(1.25)} 21%{opacity:1;transform:scale(1.13)} 30%{opacity:1;transform:scale(.95)} 39%,58%{opacity:1;transform:scale(1)} 62%,100%{opacity:0;transform:scale(1)} }
+@keyframes vx-film-light { 0%,35%{opacity:0;transform:translate(-15px,0) skewX(-6deg)} 40%{opacity:.8;transform:translate(-10px,0) skewX(-4deg)} 49%{opacity:1;transform:translate(5px,0) skewX(2deg)} 57%{opacity:1;transform:translate(12px,0) skewX(4deg)} 63%,94%{opacity:.35;transform:none} 99%,100%{opacity:0;transform:none} }
+@keyframes vx-film-exposure { 0%,37%{filter:brightness(.85)} 49%{filter:brightness(1.4)} 61%,95%{filter:brightness(1.05)} 100%{filter:brightness(.85)} }
+@keyframes vx-film-shutter { 0%,58%{opacity:0;transform:scale(1)} 59.5%{opacity:1;transform:scale(1)} 61.5%{opacity:0;transform:scale(.35)} 100%{opacity:0;transform:scale(1)} }
+@keyframes vx-film-capture { 0%,59%{opacity:0} 60%{opacity:.9} 62%,100%{opacity:0} }
+@keyframes vx-film-room-proof { 0%,58%{opacity:0;transform:translate(30px,-45px) scale(.4)} 62%{opacity:1;transform:translate(20px,-30px) scale(.55)} 74%{opacity:1;transform:translate(0,-7px) scale(1)} 81%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,7px)} }
+@keyframes vx-film-room-develop { 0%,65%{opacity:0} 71%{opacity:.3} 80%,94%{opacity:1} 99%,100%{opacity:0} }
+@keyframes vx-film-check { 0%,79%{opacity:0;transform:scale(.4)} 85%{opacity:1;transform:scale(1.16)} 89%,94%{opacity:1;transform:scale(1)} 99%,100%{opacity:0;transform:scale(1)} }
+@keyframes vx-film-board { 0%,4%{opacity:0;transform:translate(-8px,14px)} 14%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,10px)} }
+@keyframes vx-film-clips { 0%,10%{opacity:0;transform:translateY(-12px)} 17%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translateY(-6px)} }
+@keyframes vx-film-stack { 0%,8%{opacity:0;transform:translate(14px,4px)} 17%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(9px,3px)} }
+@keyframes vx-film-selection { 0%,38%{opacity:0;transform:translate(-14px,-8px)} 39%,40%{opacity:1;transform:translate(-14px,-8px)} 46%{opacity:1;transform:none} 52%{opacity:1;transform:translate(15px,8px)} 58%{opacity:1;transform:none} 61%,100%{opacity:0;transform:none} }
+@keyframes vx-film-scan { 0%,38%{opacity:0;transform:translate(-16px,-9px)} 39%,40%{opacity:1;transform:translate(-16px,-9px)} 46%{opacity:1;transform:none} 52%{opacity:1;transform:translate(15px,8px)} 58%{opacity:1;transform:none} 61%,100%{opacity:0;transform:translate(12px,0)} }
+@keyframes vx-film-selected { 0%,58%{opacity:0;transform:translate(-24px,-22px) scale(.65)} 60%{opacity:1;transform:translate(-24px,-22px) scale(.65)} 68%{opacity:1;transform:translate(-10px,-10px) scale(1.06)} 77%{opacity:1;transform:translate(0,-4px) scale(1)} 83%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(7px,4px)} }
+@keyframes vx-film-contact-develop { 0%,65%{opacity:0} 71%{opacity:.25} 78%,94%{opacity:1} 99%,100%{opacity:0} }
+@keyframes vx-film-crop { 0%,59%{opacity:0;transform:scale(1.25)} 63%{opacity:1;transform:scale(1.1)} 71%{opacity:1;transform:scale(.96)} 77%{opacity:1;transform:scale(1)} 81%,100%{opacity:0;transform:scale(1)} }
+@keyframes vx-film-back-left { 0%,78%{transform:none} 86%,95%{transform:translate(-3px,1px)} 100%{transform:none} }
+@keyframes vx-film-back-centre { 0%,78%{transform:none} 86%,95%{transform:translate(0,-1px)} 100%{transform:none} }
+@keyframes vx-film-back-right { 0%,78%{transform:none} 86%,95%{transform:translate(4px,0)} 100%{transform:none} }
+@keyframes vx-film-thumb-0 { 0%,17.0%{opacity:0;transform:translate(-18px,15px)} 22.0%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,5px)} }
+@keyframes vx-film-thumb-1 { 0%,19.4%{opacity:0;transform:translate(-12px,-14px)} 24.4%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,5px)} }
+@keyframes vx-film-thumb-2 { 0%,21.8%{opacity:0;transform:translate(-7px,13px)} 26.8%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,5px)} }
+@keyframes vx-film-thumb-3 { 0%,24.2%{opacity:0;transform:translate(9px,-12px)} 29.2%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,5px)} }
+@keyframes vx-film-thumb-4 { 0%,26.6%{opacity:0;transform:translate(15px,14px)} 31.6%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,5px)} }
+@keyframes vx-film-thumb-5 { 0%,29.0%{opacity:0;transform:translate(21px,-15px)} 34.0%,94%{opacity:1;transform:none} 99%,100%{opacity:0;transform:translate(0,5px)} }
+@keyframes vx-film-caption-0 { 0%,18%{opacity:1} 20%,100%{opacity:0} }
+@keyframes vx-film-caption-1 { 0%,19%{opacity:0} 21%,38%{opacity:1} 40%,100%{opacity:0} }
+@keyframes vx-film-caption-2 { 0%,39%{opacity:0} 41%,58%{opacity:1} 60%,100%{opacity:0} }
+@keyframes vx-film-caption-3 { 0%,59%{opacity:0} 61%,78%{opacity:1} 80%,100%{opacity:0} }
+@keyframes vx-film-caption-4 { 0%,79%{opacity:0} 81%,96%{opacity:1} 100%{opacity:0} }
+
+@media (prefers-reduced-motion: reduce) {
+  .vx-figure[data-seen="true"] * { animation: none !important; }
+  .vx-figure :is(.vx-part,.vx-room-proof,.vx-room-proof-image,.vx-room-proof-check,.vx-contact-sheet,.vx-contact-develop,.vx-contact-check) { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .vx-figure :is(.vx-room-framing,.vx-room-shutter,.vx-room-capture,.vx-contact-scan,.vx-contact-selection,.vx-contact-crop,.vx-story-caption:not(.vx-caption-final)) { opacity: 0 !important; }
+  .vx-figure .vx-caption-final { opacity: 1 !important; }
 }
 </style>
 </head><body><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://prointeriors.ru/#person","name":"Александр Кузнецов","jobTitle":"Интерьерный и архитектурный фотограф","url":"https://prointeriors.ru","image":"https://prointeriors.ru/media/portrait-aleksandr-kuznetsov-1200.avif","telephone":"+7 965 850-25-52","email":"thealexmay@yandex.ru","sameAs":["https://alkruze.ru/about","https://t.me/alkruze","https://max.ru/u/f9LHodD0cOKoyN6PJvJLjSy2zglOE6WkcZGM89SzNGKQwxVPvpT2o9Dzs64"]},{"@type":"ProfessionalService","@id":"https://prointeriors.ru/#service","name":"Интерьерная фотосъёмка — Александр Кузнецов","url":"https://prointeriors.ru","description":"Интерьерная и архитектурная фотосъёмка в Москве: отели, частные интерьеры и коммерческие пространства. Портфолио Александра Кузнецова.","provider":{"@id":"https://prointeriors.ru/#person"},"areaServed":[{"@type":"City","name":"Москва"},{"@type":"Country","name":"Россия"}],"telephone":"+7 965 850-25-52","email":"thealexmay@yandex.ru","image":"https://prointeriors.ru/media/og-alexander-kuznetsov.jpg"},{"@type":"ItemList","@id":"https://prointeriors.ru/#portfolio","name":"Портфолио интерьерной съёмки Александра Кузнецова","numberOfItems":14,"itemListElement":[{"@type":"ListItem","position":1,"name":"Cosmos Selection Арбат — Номер 528","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-528/"},{"@type":"ListItem","position":2,"name":"Cosmos Selection Арбат — Номер 541","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-541/"},{"@type":"ListItem","position":3,"name":"Cosmos Selection Арбат — Номер 716","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-716/"},{"@type":"ListItem","position":4,"name":"Cosmos Selection Арбат — Номер 728","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-728/"},{"@type":"ListItem","position":5,"name":"Отель Ареал","url":"https://prointeriors.ru/projects/otel-areal/"},{"@type":"ListItem","position":6,"name":"Отель Ареал — Территория отеля","url":"https://prointeriors.ru/projects/otel-areal-outdoor/"},{"@type":"ListItem","position":7,"name":"Живописный переулок","url":"https://prointeriors.ru/projects/zhivopisny-pereulok/"},{"@type":"ListItem","position":8,"name":"Изумрудный лес — Делюкс","url":"https://prointeriors.ru/projects/izumrudny-les-delyuks/"},{"@type":"ListItem","position":9,"name":"Изумрудный лес — Интерьерные зоны","url":"https://prointeriors.ru/projects/izumrudny-les-interiernye-zony/"},{"@type":"ListItem","position":10,"name":"Изумрудный лес — Коттедж Алтай","url":"https://prointeriors.ru/projects/izumrudny-les-kottedzh-altay/"},{"@type":"ListItem","position":11,"name":"Изумрудный лес — Шале","url":"https://prointeriors.ru/projects/izumrudny-les-shale/"},{"@type":"ListItem","position":12,"name":"Царьград — Коттедж Сказка","url":"https://prointeriors.ru/projects/tsargrad-kottedzh-skazka/"},{"@type":"ListItem","position":13,"name":"Царьград — Номер 3410","url":"https://prointeriors.ru/projects/tsargrad-nomer-3410/"},{"@type":"ListItem","position":14,"name":"Царьград — Семейный люкс","url":"https://prointeriors.ru/projects/tsargrad-semeyny-lyuks/"}]}]}</script><main class="project-page project-page--prototype"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://prointeriors.ru/projects/zhivopisny-pereulok/#breadcrumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Портфолио интерьерной съёмки","item":"https://prointeriors.ru/"},{"@type":"ListItem","position":2,"name":"Живописный переулок","item":"https://prointeriors.ru/projects/zhivopisny-pereulok/"}]},{"@type":"CollectionPage","@id":"https://prointeriors.ru/projects/zhivopisny-pereulok/#page","url":"https://prointeriors.ru/projects/zhivopisny-pereulok/","name":"Загородный дом в Живописном переулке — интерьерная съёмка","description":"Интерьерная фотосъёмка загородного дома в Живописном переулке: современные дизайнерские решения, общие планы комнат, лестница и выразительные детали.","inLanguage":"ru-RU","breadcrumb":{"@id":"https://prointeriors.ru/projects/zhivopisny-pereulok/#breadcrumbs"},"creator":{"@id":"https://prointeriors.ru/#person"},"mainEntity":{"@id":"https://prointeriors.ru/projects/zhivopisny-pereulok/#gallery"}},{"@type":"ImageGallery","@id":"https://prointeriors.ru/projects/zhivopisny-pereulok/#gallery","name":"Живописный переулок","description":"Современный загородный дом с выразительными авторскими решениями. Съёмка передаёт масштаб пространства, планировку этажей и тонкие дизайнерские элементы отделки.","numberOfItems":16,"associatedMedia":[{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-3146.avif","name":"Просторная спальня с голубым изголовьем, банкеткой и телевизором","caption":"Просторная спальня с голубым изголовьем, банкеткой и телевизором","width":3146,"height":1974,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-2100.avif","name":"Синий туалетный столик с зеркалом между настенными бра","caption":"Синий туалетный столик с зеркалом между настенными бра","width":2100,"height":3150,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-3146.avif","name":"Спальня с рабочим столом, телевизором и напольными колонками","caption":"Спальня с рабочим столом, телевизором и напольными колонками","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-3146.avif","name":"Светлая спальня с мягким изголовьем и синим креслом у окна","caption":"Светлая спальня с мягким изголовьем и синим креслом у окна","width":3146,"height":2099,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-3146.avif","name":"Кровать с мятным текстилем и вазой цветов в спальне","caption":"Кровать с мятным текстилем и вазой цветов в спальне","width":3146,"height":2099,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-2100.avif","name":"Светлая лестница с тёмными ступенями и консолью с цветами","caption":"Светлая лестница с тёмными ступенями и консолью с цветами","width":2100,"height":3052,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-3146.avif","name":"Гостиная с синими диванами, стеклянными витринами и зеркалом","caption":"Гостиная с синими диванами, стеклянными витринами и зеркалом","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-3146.avif","name":"Столовая с большим тёмным столом, светлыми стульями и окнами","caption":"Столовая с большим тёмным столом, светлыми стульями и окнами","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-3146.avif","name":"Светлая кухня с островом, барными стульями и двумя окнами","caption":"Светлая кухня с островом, барными стульями и двумя окнами","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-2100.avif","name":"Обеденная зона с тёмным столом, люстрой и светлыми витринами","caption":"Обеденная зона с тёмным столом, люстрой и светлыми витринами","width":2100,"height":3150,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-3146.avif","name":"Светлая ванная с накладной раковиной и душевой за стеклом","caption":"Светлая ванная с накладной раковиной и душевой за стеклом","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-3146.avif","name":"Две накладные раковины под большим зеркалом в светлой ванной","caption":"Две накладные раковины под большим зеркалом в светлой ванной","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-2100.avif","name":"Зона раковины с красной тумбой и высокими напольными растениями","caption":"Зона раковины с красной тумбой и высокими напольными растениями","width":2100,"height":3013,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-3146.avif","name":"Бирюзовая ванная с двойной раковиной, ванной у окна и банкеткой","caption":"Бирюзовая ванная с двойной раковиной, ванной у окна и банкеткой","width":3146,"height":2097,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-3146.avif","name":"Ваза с цветущими ветками на обеденном столе перед кухней","caption":"Ваза с цветущими ветками на обеденном столе перед кухней","width":3146,"height":2098,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}},{"@type":"ImageObject","contentUrl":"https://prointeriors.ru/media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-2100.avif","name":"Настольная лампа и букет роз на белом комоде в гостиной","caption":"Настольная лампа и букет роз на белом комоде в гостиной","width":2100,"height":3032,"creator":{"@id":"https://prointeriors.ru/#person"},"copyrightHolder":{"@id":"https://prointeriors.ru/#person"}}]}]}</script><header class="project-page__site-header"><a class="project-page__brand" href="../../" aria-label="Александр Кузнецов — на главную">AK</a><nav aria-label="Навигация по странице проекта"><a href="../../#projects">Все проекты</a><a href="../../#estimate">Стоимость</a><a href="../../#contacts">Контакты</a></nav></header><article><header class="project-page__hero"><div class="project-page__hero-copy"><p class="project-page__eyebrow">Загородный дом · Московская область</p><h1>Живописный переулок</h1><p class="project-page__intro">Современный загородный дом с выразительными авторскими решениями. Съёмка передаёт масштаб пространства, планировку этажей и тонкие дизайнерские элементы отделки.</p><dl class="project-page__facts"><div><dt>Объект</dt><dd>Загородный дом</dd></div><div><dt>Место</dt><dd>Московская область, Живописный переулок</dd></div><div><dt>Серия</dt><dd>16<!-- --> фотографий</dd></div></dl></div><a class="project-page__cover" href="../../#project=zhivopisny-pereulok&amp;image=1&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть полноэкранную галерею «Живописный переулок»"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-mobile-1722.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-14-3146.avif 3146w" sizes="(max-width: 960px) 100vw, 62vw" alt="Просторная спальня с голубым изголовьем, банкеткой и телевизором" width="3146" height="1974"/></picture><span><strong>16</strong> открыть серию ↗</span></a></header><section class="project-page__story project-page__story--prototype" aria-labelledby="project-story-title"><div><p class="project-page__eyebrow">О съёмке</p><h2 id="project-story-title">Первый загородный особняк</h2></div><div class="project-page__story-copy project-page__story-copy--3"><p>Это был один из моих первых загородных объектов. До этого я снимал в основном небольшие отели и компактные комнаты, а тут передо мной оказался целый особняк. Поначалу масштаб казался непривычным, но в процессе стало ясно: в больших домах нет ничего сложного, если действовать последовательно и не спешить.</p><p>Дом спроектирован очень современно, с интересными дизайнерскими решениями. Команде проекта было важно показать не только общую планировку, но и авторские задумки компании: как сочетаются сложные материалы, как работает встроенный свет и как подобраны фактуры мебели.</p><p>В больших особняках легко увлечься только общими планами, но без деталей интерьер теряет индивидуальность. Поэтому я уделил особое внимание крупным ракурсам: фактуре дерева и камня, геометрии лестницы и предметным зонам. В результате серия получилась и объёмной, и живой.</p><ul aria-label="Главные акценты серии"><li><span>0<!-- -->1</span>авторский дизайн-проект</li><li><span>0<!-- -->2</span>общие планы и переходы</li><li><span>0<!-- -->3</span>дизайнерские элементы и детали</li></ul></div></section><section class="project-page__gallery" aria-labelledby="project-gallery-title"><header><div><p class="project-page__eyebrow">Галерея</p><h2 id="project-gallery-title">Живописный переулок</h2></div><a href="../../#project=zhivopisny-pereulok&amp;image=1&amp;returnProject=zhivopisny-pereulok">Полноэкранный просмотр ↗</a></header><div class="project-page__image-grid"><figure><a href="../../#project=zhivopisny-pereulok&amp;image=2&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 2 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-mobile-1080.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-2100.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-2100.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-15-2100.avif 2100w" sizes="(max-width: 720px) 100vw, 50vw" alt="Синий туалетный столик с зеркалом между настенными бра" width="2100" height="3150" loading="lazy"/></picture><span>02</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=3&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 3 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-16-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Спальня с рабочим столом, телевизором и напольными колонками" width="3146" height="2097" loading="lazy"/></picture><span>03</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=4&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 4 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-mobile-1619.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-04-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Светлая спальня с мягким изголовьем и синим креслом у окна" width="3146" height="2099" loading="lazy"/></picture><span>04</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=5&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 5 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-mobile-1619.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-01-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Кровать с мятным текстилем и вазой цветов в спальне" width="3146" height="2099" loading="lazy"/></picture><span>05</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=6&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 6 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-mobile-1080.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-2100.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-2100.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-07-2100.avif 2100w" sizes="(max-width: 720px) 100vw, 50vw" alt="Светлая лестница с тёмными ступенями и консолью с цветами" width="2100" height="3052" loading="lazy"/></picture><span>06</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=7&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 7 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-08-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Гостиная с синими диванами, стеклянными витринами и зеркалом" width="3146" height="2097" loading="lazy"/></picture><span>07</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=8&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 8 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-10-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Столовая с большим тёмным столом, светлыми стульями и окнами" width="3146" height="2097" loading="lazy"/></picture><span>08</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=9&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 9 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-11-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Светлая кухня с островом, барными стульями и двумя окнами" width="3146" height="2097" loading="lazy"/></picture><span>09</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=10&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 10 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-mobile-1080.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-2100.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-2100.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-13-2100.avif 2100w" sizes="(max-width: 720px) 100vw, 50vw" alt="Обеденная зона с тёмным столом, люстрой и светлыми витринами" width="2100" height="3150" loading="lazy"/></picture><span>10</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=11&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 11 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-02-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Светлая ванная с накладной раковиной и душевой за стеклом" width="3146" height="2097" loading="lazy"/></picture><span>11</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=12&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 12 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-03-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Две накладные раковины под большим зеркалом в светлой ванной" width="3146" height="2097" loading="lazy"/></picture><span>12</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=13&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 13 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-mobile-1080.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-2100.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-2100.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-06-2100.avif 2100w" sizes="(max-width: 720px) 100vw, 50vw" alt="Зона раковины с красной тумбой и высокими напольными растениями" width="2100" height="3013" loading="lazy"/></picture><span>13</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=14&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 14 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-mobile-1621.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-17-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Бирюзовая ванная с двойной раковиной, ванной у окна и банкеткой" width="3146" height="2097" loading="lazy"/></picture><span>14</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=15&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 15 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-mobile-1620.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-3146.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-3146.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-12-3146.avif 3146w" sizes="(max-width: 720px) 100vw, 50vw" alt="Ваза с цветущими ветками на обеденном столе перед кухней" width="3146" height="2098" loading="lazy"/></picture><span>15</span></a></figure><figure><a href="../../#project=zhivopisny-pereulok&amp;image=16&amp;returnProject=zhivopisny-pereulok" aria-label="Открыть фотографию 16 из 16 в полноэкранной галерее"><picture class="responsive-project-image"><source media="(max-width: 1024px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-mobile-1080.avif"/><source media="(min-width: 1025px)" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-2100.avif"/><img src="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-2100.avif" srcSet="../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-768.avif 768w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-1600.avif 1600w, ../../media/projects/zhivopisny-pereulok/zhivopisny-pereulok-interier-09-2100.avif 2100w" sizes="(max-width: 720px) 100vw, 50vw" alt="Настольная лампа и букет роз на белом комоде в гостиной" width="2100" height="3032" loading="lazy"/></picture><span>16</span></a></figure></div></section><nav class="project-page__project-nav" aria-label="Соседние проекты"><a href="../../projects/otel-areal-outdoor/"><span>Предыдущий</span><strong>Отель Ареал — Территория отеля</strong></a><a href="../../projects/izumrudny-les-delyuks/"><span>Следующий</span><strong>Изумрудный лес — Делюкс</strong></a></nav><footer class="project-page__cta"><p class="project-page__eyebrow">Интерьерная съёмка · Москва и Россия</p><h2>Обсудить ваш объект</h2><p>Пришлите план, несколько фотографий и коротко расскажите, где будете использовать готовую серию.</p><a href="../../#contacts">Связаться со мной ↗</a></footer></article></main></body></html>
