@@ -2062,6 +2062,14 @@ a:focus-visible,
   object-position: 46% center;
 }
 
+.project-card[data-project-slug='izumrudny-les-kottedzh-altay'] .project-card__image img {
+  transform: scale(1.02);
+}
+
+.project-card[data-project-slug='izumrudny-les-kottedzh-altay'] > :is(button, a):is(:hover, :focus-visible) .project-card__image img {
+  transform: scale(1.055);
+}
+
 .gallery-count-badge {
   align-items: center;
   background: var(--theme-panel);
@@ -2220,12 +2228,11 @@ a:focus-visible,
 }
 
 .approach-intro {
-  border-top: 1px solid var(--theme-line);
   display: grid;
   align-items: start;
   column-gap: clamp(24px, 3vw, 56px);
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  padding: clamp(34px, 3.4vw, 56px) 0 clamp(56px, 7vw, 112px);
+  padding: 0 0 clamp(56px, 7vw, 112px);
 }
 
 .approach-intro > p:first-child,
@@ -9799,6 +9806,46 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
 
   .project-page__cta h2 {
     font-size: clamp(50px, 15vw, 72px);
+  }
+}
+
+/* Equal paired covers in the existing desktop layout. */
+@media (min-width: 1367px), (min-width: 1025px) and (not (any-pointer: coarse)) {
+  .featured-grid,
+  .project-portfolio-grid {
+    column-gap: clamp(20px, 3.6vw, 56px);
+  }
+
+  .featured-project--wide {
+    grid-column: 1 / 7;
+  }
+
+  .featured-project--portrait {
+    align-self: start;
+    grid-column: 7 / 13;
+    margin-bottom: 0;
+  }
+
+  .featured-project--wide figure,
+  .featured-project--portrait figure {
+    aspect-ratio: 3 / 2;
+  }
+
+  .project-portfolio-grid {
+    grid-auto-flow: row;
+  }
+
+  .project-portfolio-grid .project-card {
+    grid-column: span 6;
+    padding-top: 0;
+  }
+
+  .project-portfolio-grid .project-card figure {
+    aspect-ratio: 3 / 2;
+  }
+
+  .project-card[data-project-slug='tsargrad-semeyny-lyuks'] .project-card__image img {
+    object-position: center 35%;
   }
 }
 
