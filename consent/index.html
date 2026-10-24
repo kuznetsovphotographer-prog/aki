@@ -10360,63 +10360,6 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
 
 }
 
-/* Retained contact-sheet story; other section layouts use the classic composition. */
-[data-visual-mode="heron"] .process > .section-heading {
-  align-items: center;
-  column-gap: clamp(32px, 5vw, 88px);
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-  row-gap: 24px;
-}
-[data-visual-mode="heron"] .process > .section-heading > .vx-label {
-  align-items: stretch;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  grid-column: 1;
-  grid-row: 1 / 3;
-  justify-content: center;
-  min-height: 280px;
-  padding: 0;
-  max-width: none;
-  min-width: 0;
-  width: 100%;
-}
-[data-visual-mode="heron"] .process > .section-heading h2 {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: end;
-  font-size: clamp(44px, 4vw, 70px);
-}
-[data-visual-mode="heron"] .process > .section-heading > span {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: start;
-  justify-self: start;
-}
-[data-visual-mode="heron"] :is(.vx-slot--room, .vx-slot--contact) {
-  bottom: auto;
-  height: auto;
-  left: auto;
-  margin: 0 auto;
-  max-width: 460px;
-  position: relative;
-  right: auto;
-  top: auto;
-  transform: none;
-  width: 100%;
-  overflow: clip;
-}
-[data-visual-mode="heron"] .vx-slot--contact { max-width: 440px; }
-.vx-figure text { font-family: var(--sans); letter-spacing: 0; text-transform: none; }
-@media (max-width: 1024px), (any-pointer: coarse) and (max-width: 1366px) {
-    [data-visual-mode="heron"] .process > .section-heading { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  [data-visual-mode="heron"] .process > .section-heading > .vx-label { grid-column: 1; grid-row: 1; min-height: 0; padding: 0; gap: 12px; }
-    [data-visual-mode="heron"] .process > .section-heading h2 { grid-column: 1; grid-row: 2; font-size: clamp(36px, 6.5vw, 58px); }
-    [data-visual-mode="heron"] .process > .section-heading > span { grid-column: 1; grid-row: 3; }
-  [data-visual-mode="heron"] :is(.vx-slot--room, .vx-slot--contact) { width: 100%; max-width: 420px; }
-}
-
 /* Two synchronized 15-second mini-films. Integrate after older vx animation rules.
    data-seen keeps the timeline alive; data-active controls pause/resume.
    All shapes and every visible caption have a complete static fallback. */
@@ -10610,6 +10553,179 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   .vx-figure :is(.vx-part,.vx-room-proof,.vx-room-proof-image,.vx-room-proof-check,.vx-contact-sheet,.vx-contact-develop,.vx-contact-check) { opacity: 1 !important; transform: none !important; filter: none !important; }
   .vx-figure :is(.vx-room-framing,.vx-room-shutter,.vx-room-capture,.vx-contact-scan,.vx-contact-selection,.vx-contact-crop,.vx-story-caption:not(.vx-caption-final)) { opacity: 0 !important; }
   .vx-figure .vx-caption-final { opacity: 1 !important; }
+}
+
+/* Section headings share the page centre; hero and project captions keep their composition. */
+.section-heading.section-heading--centered {
+  align-items: center;
+  column-gap: clamp(20px, 3vw, 52px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.3fr) minmax(0, 1fr);
+  row-gap: 20px;
+  text-align: center;
+}
+.section-heading.section-heading--centered > :first-child {
+  align-self: center;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  max-width: 29ch;
+  padding-top: 0;
+}
+.section-heading.section-heading--centered > h2 {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  max-width: none;
+  text-align: center;
+  white-space: normal;
+  width: 100%;
+}
+.section-heading.section-heading--centered > :last-child {
+  align-self: center;
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: center;
+  max-width: 30ch;
+  padding-top: 0;
+  text-align: center;
+}
+.section-heading--centered h2 > span { white-space: normal; }
+.contacts .contacts-copy { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+.contacts .contacts-copy > h2 { grid-column: 1; grid-row: 1; justify-self: center; text-align: center; }
+.contacts .contacts-copy > span { grid-column: 1; grid-row: 2; justify-self: center; text-align: center; }
+
+/* A compact editorial row: supporting copy, centred title, animated figure. */
+:is(.advantages-intro,.section-heading).centered-story-header {
+  align-items: center;
+  column-gap: clamp(32px, 4.2vw, 80px);
+  display: grid;
+  grid-template-columns: minmax(0, 180px) minmax(0, clamp(460px, 45vw, 720px)) minmax(0, 180px);
+  justify-content: center;
+  padding-bottom: clamp(24px, 2.6vw, 40px);
+  row-gap: 0;
+}
+:is(.advantages-intro,.section-heading).centered-story-header > h2 {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  margin: 0;
+  max-width: none;
+  text-align: center;
+  width: 100%;
+}
+:is(.advantages-intro,.section-heading).centered-story-header > h2 > span { display: block; white-space: normal; }
+.section-story-copy {
+  align-self: center;
+  color: var(--theme-muted);
+  display: grid;
+  font-size: var(--body-copy-size);
+  gap: 12px;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  line-height: 1.5;
+  max-width: 180px;
+  width: 100%;
+}
+.section-story-copy > p { margin: 0; }
+.section-story-copy .section-story-kicker {
+  color: var(--theme-fg);
+  font-size: 8px;
+  font-weight: 650;
+  letter-spacing: .16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.section-story-copy .section-story-lead { color: var(--theme-fg); font-size: clamp(15px, 1.1vw, 18px); line-height: 1.5; }
+.section-story-art {
+  aspect-ratio: 5 / 3;
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: start;
+  max-width: 180px;
+  min-width: 0;
+  width: 100%;
+}
+[data-visual-mode="heron"] .section-story-art .vx-slot {
+  aspect-ratio: auto;
+  bottom: auto;
+  height: 100%;
+  left: auto;
+  margin: 0;
+  max-width: none;
+  overflow: clip;
+  position: relative;
+  top: auto;
+  transform: none;
+  width: 100%;
+}
+.vx-figure text { font-family: var(--sans); letter-spacing: 0; text-transform: none; }
+/* Match the finished drawings' visible right edges despite different SVG whitespace. */
+.section-story-art .vx-figure--expertise { transform-box: border-box; translate: 3.3% 0; }
+.page-canvas:not([data-visual-mode="heron"]) .section-story-art { display: none; }
+
+:is(.section-heading--centered,.centered-story-header) > h2 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 4.3vw, 70px);
+  font-weight: 400;
+  letter-spacing: -.06em;
+  line-height: 1.04;
+}
+
+@media (max-width: 1024px), (any-pointer: coarse) and (max-width: 1366px) {
+  .section-heading.section-heading--centered { gap: 18px; grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .section-heading.section-heading--centered > h2 { grid-column: 1; grid-row: 1; }
+  .section-heading.section-heading--centered > :first-child { grid-column: 1; grid-row: 2; }
+  .section-heading.section-heading--centered > :last-child { grid-column: 1; grid-row: 3; max-width: 52ch; }
+  :is(.advantages-intro,.section-heading).centered-story-header { column-gap: clamp(24px, 3vw, 40px); grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
+  :is(.advantages-intro,.section-heading).centered-story-header > h2 { grid-column: 1 / -1; grid-row: 1; }
+  .centered-story-header > .section-story-copy { grid-column: 1; grid-row: 2; justify-self: end; max-width: 180px; }
+  .centered-story-header > .section-story-art { grid-column: 2; grid-row: 2; justify-self: start; max-width: 180px; }
+  :is(.section-heading--centered,.centered-story-header) > h2 { font-size: clamp(36px, 7vw, 58px); }
+}
+
+/* The photographic craft story: assembly, framing, light, alignment, finished print. */
+.vx-figure--expertise :is(.vx-craft-beam,.vx-craft-align,.vx-craft-flash) { opacity: 0; }
+.vx-figure--expertise[data-seen="true"] :is(.vx-craft-base,.vx-craft-monitor,.vx-craft-tripod,.vx-craft-camera,.vx-craft-light,.vx-craft-focus,.vx-craft-beam,.vx-craft-align,.vx-craft-flash,.vx-craft-preview,.vx-craft-proof,.vx-story-caption) {
+  animation-duration: 15s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+  animation-timing-function: ease-in-out;
+}
+.vx-figure--expertise[data-active="true"] :is(.vx-craft-base,.vx-craft-monitor,.vx-craft-tripod,.vx-craft-camera,.vx-craft-light,.vx-craft-focus,.vx-craft-beam,.vx-craft-align,.vx-craft-flash,.vx-craft-preview,.vx-craft-proof,.vx-story-caption) { animation-play-state: running; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-base { animation-name: vx-craft-base; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-monitor { animation-name: vx-craft-monitor; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-tripod { animation-name: vx-craft-tripod; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-camera { animation-name: vx-craft-camera; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-light { animation-name: vx-craft-light; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-focus { animation-name: vx-craft-focus; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-beam { animation-name: vx-craft-beam; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-align { animation-name: vx-craft-align; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-flash { animation-name: vx-craft-flash; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-preview { animation-name: vx-craft-preview; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-proof { animation-name: vx-craft-proof; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-caption-kit { animation-name: vx-film-caption-0; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-caption-angle { animation-name: vx-film-caption-1; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-caption-light { animation-name: vx-film-caption-2; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-caption-align { animation-name: vx-film-caption-3; }
+.vx-figure--expertise[data-seen="true"] .vx-craft-caption-final { animation-name: vx-film-caption-4; }
+@keyframes vx-craft-base { 0% { opacity: 0; transform: translateY(7px); } 8%,95% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(4px); } }
+@keyframes vx-craft-monitor { 0%,4% { opacity: 0; transform: translateY(-7px); } 15%,95% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vx-craft-tripod { 0%,7% { opacity: 0; transform: translateY(8px); } 19%,95% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vx-craft-camera { 0%,12% { opacity: 0; transform: translateY(-12px); } 23%,95% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vx-craft-light { 0%,19% { opacity: 0; transform: translateY(8px); } 32%,95% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vx-craft-focus { 0%,23%,95%,100% { transform: translate(0); } 32% { transform: translate(1px,.4px); } 42% { transform: translate(-.6px,-.2px); } 50%,90% { transform: translate(0); } }
+@keyframes vx-craft-beam { 0%,40%,66%,100% { opacity: 0; } 47%,59% { opacity: 1; } }
+@keyframes vx-craft-align { 0%,59%,79%,100% { opacity: 0; } 64%,73% { opacity: 1; } }
+@keyframes vx-craft-flash { 0%,74%,80%,100% { opacity: 0; } 76% { opacity: .8; } }
+@keyframes vx-craft-preview { 0%,79% { opacity: 0; } 85%,96% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes vx-craft-proof { 0%,77% { opacity: 0; transform: translate(-5px,8px); } 88%,96% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .vx-figure--expertise :is(.vx-part,.vx-craft-preview) { opacity: 1 !important; transform: none !important; }
+  .vx-figure--expertise :is(.vx-craft-beam,.vx-craft-align,.vx-craft-flash,.vx-story-caption:not(.vx-caption-final)) { opacity: 0 !important; }
+  .vx-figure--expertise .vx-caption-final { opacity: 1 !important; }
 }
 </style>
 </head><body><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://prointeriors.ru/#person","name":"Александр Кузнецов","jobTitle":"Интерьерный и архитектурный фотограф","url":"https://prointeriors.ru","image":"https://prointeriors.ru/media/portrait-aleksandr-kuznetsov-1200.avif","telephone":"+7 965 850-25-52","email":"thealexmay@yandex.ru","sameAs":["https://alkruze.ru/about","https://t.me/alkruze","https://max.ru/u/f9LHodD0cOKoyN6PJvJLjSy2zglOE6WkcZGM89SzNGKQwxVPvpT2o9Dzs64"]},{"@type":"ProfessionalService","@id":"https://prointeriors.ru/#service","name":"Интерьерная фотосъёмка — Александр Кузнецов","url":"https://prointeriors.ru","description":"Интерьерная и архитектурная фотосъёмка в Москве: отели, частные интерьеры и коммерческие пространства. Портфолио Александра Кузнецова.","provider":{"@id":"https://prointeriors.ru/#person"},"areaServed":[{"@type":"City","name":"Москва"},{"@type":"Country","name":"Россия"}],"telephone":"+7 965 850-25-52","email":"thealexmay@yandex.ru","image":"https://prointeriors.ru/media/og-alexander-kuznetsov.jpg"},{"@type":"ItemList","@id":"https://prointeriors.ru/#portfolio","name":"Портфолио интерьерной съёмки Александра Кузнецова","numberOfItems":14,"itemListElement":[{"@type":"ListItem","position":1,"name":"Cosmos Selection Арбат — Номер 528","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-528/"},{"@type":"ListItem","position":2,"name":"Cosmos Selection Арбат — Номер 541","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-541/"},{"@type":"ListItem","position":3,"name":"Cosmos Selection Арбат — Номер 716","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-716/"},{"@type":"ListItem","position":4,"name":"Cosmos Selection Арбат — Номер 728","url":"https://prointeriors.ru/projects/cosmos-selection-arbat-728/"},{"@type":"ListItem","position":5,"name":"Отель Ареал","url":"https://prointeriors.ru/projects/otel-areal/"},{"@type":"ListItem","position":6,"name":"Отель Ареал — Территория отеля","url":"https://prointeriors.ru/projects/otel-areal-outdoor/"},{"@type":"ListItem","position":7,"name":"Живописный переулок","url":"https://prointeriors.ru/projects/zhivopisny-pereulok/"},{"@type":"ListItem","position":8,"name":"Изумрудный лес — Делюкс","url":"https://prointeriors.ru/projects/izumrudny-les-delyuks/"},{"@type":"ListItem","position":9,"name":"Изумрудный лес — Интерьерные зоны","url":"https://prointeriors.ru/projects/izumrudny-les-interiernye-zony/"},{"@type":"ListItem","position":10,"name":"Изумрудный лес — Коттедж Алтай","url":"https://prointeriors.ru/projects/izumrudny-les-kottedzh-altay/"},{"@type":"ListItem","position":11,"name":"Изумрудный лес — Шале","url":"https://prointeriors.ru/projects/izumrudny-les-shale/"},{"@type":"ListItem","position":12,"name":"Царьград — Коттедж Сказка","url":"https://prointeriors.ru/projects/tsargrad-kottedzh-skazka/"},{"@type":"ListItem","position":13,"name":"Царьград — Номер 3410","url":"https://prointeriors.ru/projects/tsargrad-nomer-3410/"},{"@type":"ListItem","position":14,"name":"Царьград — Семейный люкс","url":"https://prointeriors.ru/projects/tsargrad-semeyny-lyuks/"}]}]}</script><main class="legal-page"><a class="legal-page__skip" href="#legal-document">Перейти к документу</a><header class="legal-page__header"><a href="../">Александр Кузнецов</a><a href="../#estimate">Вернуться на сайт</a></header><article class="legal-page__document" id="legal-document"><h1>Согласие на обработку персональных данных</h1><p>Редакция от 12 сентября 2026 года. Версия: <!-- -->2026-09-12-2<!-- -->.</p><p>Самостоятельно устанавливая галочку в форме на prointeriors.ru и отправляя заявку, я свободно, своей волей и в своём интересе даю согласие следующему Оператору:</p><p>Кузнецов Александр Александрович, плательщик налога на профессиональный доход (самозанятый). ИНН: 183115598361. Адрес: 141032, Московская область, г. Мытищи, Тенистый бульвар, дом 13, кв. 83. Электронная почта: <a href="mailto:thealexmay@yandex.ru">thealexmay@yandex.ru</a>. Телефон: <a href="tel:+79658502552">+7 965 850-25-52</a>.</p><section><h2>1. Состав данных</h2><p>Моё имя, номер телефона, предпочтительный способ связи, выбранные типы и количество объектов съёмки, цены и сумма предварительного расчёта. Также передаются отметка согласия, дата и время его принятия, версия согласия, идентификаторы заявки и формы, укрупнённый тип устройства — компьютер, телефон, планшет или «не определено» — и семейство операционной системы: Windows, macOS, Android, iOS, iPadOS, HarmonyOS, Linux, ChromeOS или «не определено».</p><p>IP-адрес, полный User-Agent, модель устройства, браузер, версия браузера и аппаратные идентификаторы в содержание заявки и прикладную запись YDB не включаются. Инфраструктурные сервисы при установлении соединения могут технически видеть IP-адрес и HTTP-заголовки согласно своим правилам.</p></section><section><h2>2. Цели и действия</h2><p>Рассмотрение обращения об интерьерной и архитектурной фотосъёмке, обратная связь, согласование условий, подготовка и исполнение договора, подтверждение факта согласия, адаптация работы формы и укрупнённая оценка устройств, с которых отправляются заявки. Разрешённые действия: сбор, запись, систематизация, накопление, хранение, уточнение, извлечение, использование, передача сервисам доставки обращения, блокирование, удаление и уничтожение с автоматизацией и без неё.</p></section><section><h2>3. Как доставляется обращение</h2><p>Я уведомлён(а), что форма передаёт данные в Yandex Cloud Functions для записи в базу Yandex Database (YDB), расположенную в Российской Федерации. В YDB сохраняются содержание заявки и подтверждение согласия, а Оператор получает контактные данные из подключённого к YDB рабочего кабинета.</p><p>После сохранения заявки через Cloudflare Worker в Telegram Оператора отправляется только служебное уведомление о новой заявке, случайный идентификатор заявки и время её получения. Идентификатор используется в ссылке на соответствующую карточку защищённого рабочего кабинета и сам по себе не содержит моего имени или телефона. Моё имя, телефон, способ связи, расчёт, отметка согласия, тип устройства и семейство ОС в уведомление не включаются. Иностранные сервисы могут обрабатывать технические данные сетевых запросов, необходимые для их работы.</p></section><section><h2>4. Срок и отзыв</h2><p>Согласие действует до достижения цели, но не более одного года после последнего содержательного контакта, если обработка не продолжается на другом законном основании. Я могу отозвать согласие письмом на <a href="mailto:thealexmay@yandex.ru">thealexmay@yandex.ru</a>, указав имя, телефон и приблизительную дату заявки. Обработка прекращается и данные удаляются в срок до 30 дней, если закон не требует иного.</p></section><section><h2>5. Отдельное волеизъявление</h2><p>Согласие не распространяется на рекламные рассылки и публичное распространение моих контактов. Я ознакомился(лась) с <a href="../privacy/">Политикой в отношении обработки персональных данных</a>. Согласие подтверждаю отдельной галочкой; одного заполнения полей или ознакомления с Политикой для этого недостаточно.</p></section></article><footer class="legal-page__footer"><a href="../privacy/">Политика обработки данных</a><a href="../consent/">Согласие на обработку данных</a></footer></main></body></html>
