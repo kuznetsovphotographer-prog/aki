@@ -6782,9 +6782,14 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   }
 
   .site-header__menu-toggle {
-    display: flex;
+    display: none;
     height: clamp(27px, 1.88vw, 37px);
     width: clamp(27px, 1.88vw, 37px);
+  }
+
+  .floating-nav {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .floating-nav.is-header-menu {
@@ -6816,8 +6821,6 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
     transform: none;
     visibility: visible;
   }
-
-  .quick-contact.is-header-aligned:not(.is-menu-open) { right: var(--gutter); }
 
   .floating-nav.is-open .floating-nav__utility,
   .quick-contact.is-menu-open {
