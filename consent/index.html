@@ -584,6 +584,7 @@ a:focus-visible,
 
 .floating-nav__contact {
   display: grid;
+  flex-shrink: 0;
   gap: 8px;
   grid-template-columns: minmax(0, 1fr);
   margin: 0 0 18px;
@@ -599,9 +600,10 @@ a:focus-visible,
 
 .floating-nav__contact.is-open {
   border-bottom: 1px solid var(--theme-line);
-  max-height: 328px;
+  margin-bottom: 24px;
+  max-height: 440px;
   opacity: 1;
-  padding: 0 0 18px;
+  padding: 0 0 24px;
   pointer-events: auto;
   transform: translateX(0);
 }
@@ -616,8 +618,10 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-.floating-nav__contact > a {
+.floating-nav__contact > :is(a, button) {
   align-items: center;
+  appearance: none;
+  background: transparent;
   border: 1px solid var(--theme-line);
   color: var(--theme-fg);
   display: inline-flex;
@@ -635,7 +639,7 @@ a:focus-visible,
   transition: color 220ms ease, transform 220ms ease;
 }
 
-.floating-nav__contact > a::before {
+.floating-nav__contact > :is(a, button)::before {
   background: linear-gradient(
     106deg,
     color-mix(in srgb, var(--theme-panel) 82%, var(--theme-bg)),
@@ -650,7 +654,7 @@ a:focus-visible,
   z-index: 0;
 }
 
-.floating-nav__contact > a > * {
+.floating-nav__contact > :is(a, button) > * {
   position: relative;
   z-index: 1;
 }
@@ -661,15 +665,28 @@ a:focus-visible,
   width: 18px;
 }
 
-.floating-nav__contact > a:hover,
-.floating-nav__contact > a:focus-visible {
+.floating-nav__contact > :is(a, button):hover,
+.floating-nav__contact > :is(a, button):focus-visible {
   color: var(--theme-fg);
 }
 
-.floating-nav__contact > a:hover::before,
-.floating-nav__contact > a:focus-visible::before {
+.floating-nav__contact > :is(a, button):hover::before,
+.floating-nav__contact > :is(a, button):focus-visible::before {
   transform: scaleX(1);
 }
+
+.floating-nav__contact > .contact-order {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--theme-line);
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 10px;
+  padding: 12px 10px 4px;
+  text-align: left;
+}
+.contact-order > svg { flex: 0 0 auto; height: 18px; width: 18px; }
+.contact-order > svg * { vector-effect: non-scaling-stroke; }
 
 .floating-nav__utility {
   opacity: 1;
@@ -895,6 +912,28 @@ a:focus-visible,
   background: var(--theme-panel);
   transform: translateX(-2px);
 }
+
+.quick-contact__panel > .contact-order {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--theme-line);
+  color: var(--theme-fg);
+  display: flex;
+  font-family: var(--sans);
+  font-size: 13px;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 10px;
+  min-height: 44px;
+  padding: 12px 8px 4px;
+  text-align: left;
+  transition: background-color 220ms ease;
+  width: 100%;
+}
+.quick-contact__panel > .contact-order:hover,
+.quick-contact__panel > .contact-order:focus-visible { background: var(--theme-panel); }
 
 .hero {
   background: var(--theme-bg);
@@ -6772,11 +6811,13 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   }
 
   .quick-contact:not(.is-menu-open) {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-18px);
-    visibility: hidden;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    visibility: visible;
   }
+
+  .quick-contact.is-header-aligned:not(.is-menu-open) { right: var(--gutter); }
 
   .floating-nav.is-open .floating-nav__utility,
   .quick-contact.is-menu-open {
@@ -6884,13 +6925,6 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   .montage-panel:active picture {
     filter: saturate(1.04) contrast(1.015);
     transform: scale(1.035);
-  }
-
-  body:has(.montage-scene.has-mobile-montage-labels) .floating-nav,
-  body:has(.montage-scene.has-mobile-montage-labels) .quick-contact {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate3d(8px, 0, 0);
   }
 
   .montage-mobile-titles {
