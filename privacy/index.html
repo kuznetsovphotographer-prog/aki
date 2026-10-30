@@ -6441,6 +6441,41 @@ html[data-process-transition='close-4']::view-transition-new(process-card-4) {
   grid-column: 1;
 }
 
+/* Inspect the image without zooming the page or moving its controls. */
+.gallery .gallery-stage figure,
+.gallery .gallery-stage figure.is-dragging,
+.gallery .gallery-stage figure.is-zoomed,
+.gallery .gallery-stage figure.is-panning {
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gallery .gallery-stage figure:focus-visible {
+  outline: 1px solid var(--theme-fg);
+  outline-offset: -2px;
+}
+
+.gallery[data-gallery-fullscreen='true'] .gallery-stage:not(.is-story-open) {
+  touch-action: none;
+}
+
+.gallery .gallery-stage:not(.is-story-open) figure {
+  height: 100%;
+}
+
+.gallery[data-gallery-fullscreen='true'] .gallery-stage:not(.is-story-open) img {
+  max-height: 100%;
+}
+
+.gallery .gallery-stage figure.is-zoomed img {
+  animation: none;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
 .gallery-stage figure {
   grid-column: 2;
 }
